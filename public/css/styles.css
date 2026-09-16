@@ -739,6 +739,18 @@ img {
   .header-subnav .subnav-promo {
     display: none;
   }
+  /* .header-subnav .container scrolls horizontally (overflow-x: auto;
+     white-space: nowrap) for the desktop pill row. On narrow screens
+     the chips (all-categories button + category links) don't all fit
+     on one line, and since there's no scroll hint, the extra chip
+     just gets abruptly cut off at the edge instead of wrapping.
+     Let it wrap onto a second line instead so nothing is clipped. */
+  .header-subnav .container {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    white-space: normal;
+    padding-block: var(--space-8);
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -1771,6 +1783,17 @@ textarea:focus {
   .product-detail-layout {
     grid-template-columns: 1fr;
     padding: var(--space-16);
+  }
+
+  /* The gallery and buy box are sticky for the desktop multi-column
+     layout only. Once the grid collapses to a single column there is
+     nothing for them to sit "beside" anymore, so sticky just makes
+     them float in place over the content that scrolls past them
+     (looks like position: fixed). Turn sticky off here. */
+  .product-gallery,
+  .product-buy-box {
+    position: static;
+    top: auto;
   }
 }
 
